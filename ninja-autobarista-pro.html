@@ -33,6 +33,167 @@ Smart friend helping someone make a buying decision on a product that is trendin
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ninja AutoBarista Pro System Review // QuietTrends</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .signal-map-block {
+            border: 1px solid rgba(0, 255, 255, 0.18);
+            background: radial-gradient(circle at top left, rgba(0, 255, 255, 0.08), rgba(4, 8, 18, 0.88) 42%);
+            box-shadow: 0 0 32px rgba(0, 255, 255, 0.07);
+        }
+
+        .signal-map-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            align-items: flex-start;
+            margin-bottom: 1.75rem;
+        }
+
+        .signal-kicker {
+            color: #00f0ff;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            font-size: 0.78rem;
+            font-weight: 800;
+            margin-bottom: 0.7rem;
+        }
+
+        .signal-status-pill {
+            display: inline-flex;
+            align-items: center;
+            border: 1px solid rgba(56, 255, 32, 0.45);
+            color: #38ff20;
+            padding: 0.55rem 0.8rem;
+            border-radius: 999px;
+            font-family: monospace;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .signal-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+            gap: 1.5rem;
+            align-items: stretch;
+        }
+
+        .signal-chart-card,
+        .signal-detail-card {
+            background: rgba(3, 8, 18, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 1.25rem;
+        }
+
+        .signal-chart-card canvas {
+            width: 100% !important;
+            min-height: 320px;
+        }
+
+        .signal-detail-card h3,
+        .signal-chart-card h3 {
+            color: #ffffff;
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .signal-source-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            gap: 0.9rem;
+        }
+
+        .signal-source-list li {
+            border-left: 3px solid #00f0ff;
+            padding-left: 0.85rem;
+            color: rgba(255, 255, 255, 0.74);
+            font-size: 0.95rem;
+            line-height: 1.55;
+        }
+
+        .signal-source-list strong {
+            color: #ffffff;
+            display: block;
+            font-size: 0.82rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.15rem;
+        }
+
+        .coverage-gap-panel {
+            margin-top: 1.5rem;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 1rem;
+        }
+
+        .coverage-gap-card {
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .coverage-gap-card span {
+            color: rgba(255, 255, 255, 0.52);
+            display: block;
+            font-family: monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .coverage-gap-card strong {
+            color: #ffffff;
+            display: block;
+            font-size: 1.8rem;
+            line-height: 1;
+        }
+
+        .coverage-gap-card p {
+            margin-top: 0.65rem;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.68);
+        }
+
+        .question-stream {
+            margin-top: 1.5rem;
+            display: grid;
+            gap: 0.7rem;
+        }
+
+        .question-stream div {
+            font-family: monospace;
+            color: rgba(255, 255, 255, 0.75);
+            background: rgba(255, 255, 255, 0.045);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 9px;
+            padding: 0.75rem 0.9rem;
+        }
+
+        .question-stream span {
+            color: #38ff20;
+            margin-right: 0.55rem;
+        }
+
+        @media (max-width: 900px) {
+            .signal-map-header,
+            .signal-grid,
+            .coverage-gap-panel {
+                grid-template-columns: 1fr;
+                display: grid;
+            }
+
+            .signal-status-pill {
+                justify-self: start;
+            }
+        }
+    </style>
 </head>
 <body>
 
@@ -81,20 +242,6 @@ Smart friend helping someone make a buying decision on a product that is trendin
         <!-- Main Body Content Block -->
         <div class="article-body-content">
             
-            <!-- Executive Summary Section
-            
-             Executive Summary
-                
-                Answer:
-                1. What is the buyer trying to decide?
-                2. What is the most important thing we learned?
-                3. What remains uncertain?
-                4. What should the buyer compare next?
-                
-                2-4 paragraphs maximum.
-                Avoid repeating specifications.
-            
-            -->
             <section class="body-section-block">
                 <h2>Executive Summary</h2>
                 <p>
@@ -108,16 +255,62 @@ Smart friend helping someone make a buying decision on a product that is trendin
                 </p>
             </section>
 
-            <!-- RECOMMENDED FOR CALLOUT BOX 
-                    
-                    Describe the ideal buyer.
-                    
-                    Examples:
-                    - Busy professionals
-                    - Frequent travelers
-                    - Coffee enthusiasts
-                    - Apartment dwellers -->
-            
+            <section class="body-section-block signal-map-block">
+                <div class="signal-map-header">
+                    <div>
+                        <p class="signal-kicker">QuietTrends Signal Intercept</p>
+                        <h2>Where the Ninja AutoBarista Pro signal is coming from</h2>
+                        <p>
+                            QuietTrends looks for products where buyer curiosity is louder than the mainstream review footprint. This chart is an editorial signal map, not a scraped count. It shows how much useful decision-making evidence each source currently contributes.
+                        </p>
+                    </div>
+                    <span class="signal-status-pill">Coverage Gap Detected</span>
+                </div>
+
+                <div class="signal-grid">
+                    <div class="signal-chart-card">
+                        <h3>Signal strength by source</h3>
+                        <canvas id="signalStrengthChart" aria-label="Signal strength chart for Ninja AutoBarista Pro"></canvas>
+                    </div>
+                    <div class="signal-detail-card">
+                        <h3>Assimilated sources</h3>
+                        <ul class="signal-source-list">
+                            <li><strong>Manufacturer</strong>Strong feature claims around one-touch cafe drinks, bean-to-cup automation, swappable hoppers, and automatic milk frothing.</li>
+                            <li><strong>Professional reviews</strong>Useful but split. Convenience is praised; espresso intensity and cold-drink performance are still debated.</li>
+                            <li><strong>YouTube demos</strong>Good for watching workflow, drink setup, and counter presence. Less useful for long-term reliability.</li>
+                            <li><strong>Amazon owners</strong>High-value signal once mature, but early listings need live review-count and negative-review checks before purchase.</li>
+                            <li><strong>Reddit chatter</strong>Useful for buyer confusion: Ninja versus De'Longhi, Breville, Philips, and whether this can replace a coffee-shop habit.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="coverage-gap-panel">
+                    <div class="coverage-gap-card">
+                        <span>Buyer curiosity</span>
+                        <strong>High</strong>
+                        <p>Expensive countertop appliance, recognizable brand, and a clear daily-use promise.</p>
+                    </div>
+                    <div class="coverage-gap-card">
+                        <span>Review saturation</span>
+                        <strong>Thin</strong>
+                        <p>Early professional coverage exists, but buyer-specific comparisons remain underdeveloped.</p>
+                    </div>
+                    <div class="coverage-gap-card">
+                        <span>QuietTrends opportunity</span>
+                        <strong>8.6</strong>
+                        <p>The gap is not whether the machine exists. The gap is whether buyers understand the tradeoff.</p>
+                    </div>
+                </div>
+
+                <div class="question-stream">
+                    <div><span>SIGNAL 01</span>Can this replace a daily Starbucks habit?</div>
+                    <div><span>SIGNAL 02</span>Is Ninja credible against De'Longhi and Breville?</div>
+                    <div><span>SIGNAL 03</span>Is the espresso strong enough, or mainly good under milk?</div>
+                    <div><span>SIGNAL 04</span>Will the milk system still feel easy after 90 days?</div>
+                    <div><span>SIGNAL 05</span>Is the Pro worth the premium over the standard AutoBarista?</div>
+                </div>
+            </section>
+
             <section class="recommendation-box">
                 <h3 class="recommendation-title">RECOMMENDED FOR</h3>
                 <p class="recommendation-intro">
@@ -132,31 +325,6 @@ Smart friend helping someone make a buying decision on a product that is trendin
                 <a href="https://www.amazon.com/dp/PLACEHOLDER?tag=quiettrends-20" class="secondary-price-btn" target="_blank" rel="noopener">CHECK PRICE ON AMAZON &rarr;</a>
             </section>
 
-            <!-- DEEP DIVE BLOCK 
-            
-                 Main Analysis Area
-                
-                Use research-driven sections.
-                
-                Choose section titles based on the product.
-                
-                Examples:
-                
-                Comparison article:
-                - Biggest Differences
-                - Performance
-                - Ownership Tradeoffs
-                - Value
-                
-                Single product article:
-                - Key Features and What We Like
-                - Potential Drawbacks
-                - Owner Feedback
-                - Buying Considerations
-                
-                Use as many subsections as necessary.
-                Do not force specific headings.
-            -->
             <section class="body-section-block">
                 <h2>Deep Dive</h2>
                 <div class="dive-subsection">
@@ -203,20 +371,6 @@ Smart friend helping someone make a buying decision on a product that is trendin
                 </div>
             </section>
 
-            <!-- OPPORTUNITY ANALYSIS SECTION
-             QuietTrends Opportunity Analysis
-                
-                Discuss:
-                
-                - Review count
-                - Review quality
-                - Buyer confusion
-                - Market positioning
-                - Competitive landscape
-                - Why this product deserves attention
-                
-                This section should feel unique to QuietTrends.
-            -->
             <section class="body-section-block opportunity-analysis-block">
                 <div class="center-btn-wrapper">
                     <a href="https://www.amazon.com/dp/PLACEHOLDER?tag=quiettrends-20" class="action-deal-btn" target="_blank" rel="noopener">VIEW LATEST DEALS &rarr;</a>
@@ -236,23 +390,6 @@ Smart friend helping someone make a buying decision on a product that is trendin
                 </p>
             </section>
 
-            <!-- FINAL VERDICT PANEL BOX 
-              Allowed verdicts only:
-                        
-                        Buy Now
-                        Compare First
-                        Watch
-                        Wait for More Reviews
-                        Avoid for Now
-                        
-                        Provide:
-                        1. Verdict
-                        2. One-sentence explanation
-                        3. Final buyer guidance
-                        
-                        Keep concise.
-            
-             -->
             <section class="verdict-panel">
                 <p class="verdict-label-mini">OUR VERDICT</p>
                 <h2 class="verdict-title-main">Compare First</h2>
@@ -296,6 +433,84 @@ Smart friend helping someone make a buying decision on a product that is trendin
         </div>
         <div class="footer-copyright">&copy; 2026 QuietTrends Engine. Operating on unquantified sentiment tracking platforms.</div>
     </footer>
+
+    <script>
+        const signalCtx = document.getElementById('signalStrengthChart');
+
+        if (signalCtx && window.Chart) {
+            new Chart(signalCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        'Buyer curiosity',
+                        'Manufacturer claims',
+                        'YouTube demos',
+                        'Professional reviews',
+                        'Reddit chatter',
+                        'Amazon owner data',
+                        'Long-term evidence'
+                    ],
+                    datasets: [{
+                        label: 'Signal strength',
+                        data: [9, 9, 7, 6, 6, 5, 3],
+                        borderWidth: 1,
+                        borderRadius: 8,
+                        backgroundColor: [
+                            'rgba(56, 255, 32, 0.86)',
+                            'rgba(0, 240, 255, 0.72)',
+                            'rgba(0, 240, 255, 0.62)',
+                            'rgba(255, 198, 48, 0.76)',
+                            'rgba(255, 198, 48, 0.68)',
+                            'rgba(255, 255, 255, 0.42)',
+                            'rgba(255, 255, 255, 0.24)'
+                        ],
+                        borderColor: 'rgba(255, 255, 255, 0.16)'
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return 'Signal strength: ' + context.raw + '/10';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            min: 0,
+                            max: 10,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.08)'
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.62)',
+                                stepSize: 2
+                            }
+                        },
+                        y: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: 'rgba(255, 255, 255, 0.78)',
+                                font: {
+                                    family: 'monospace'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
