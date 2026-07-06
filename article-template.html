@@ -7,11 +7,19 @@ Populate content only.
 
 Do not modify:
 - Layout
-- CSS
-- Class names
-- Structure
+- CSS class names already used by the site
+- Core page structure
 
-Replaceonly placeholder content.
+Replace only placeholder content.
+
+Recommended page flow:
+1. Hero
+2. Executive Summary
+3. Small Signal Snapshot
+4. Recommended For
+5. Deep Dive
+6. Opportunity Analysis
+7. Final Verdict
 
 Research minimum:
 - Manufacturer
@@ -23,7 +31,32 @@ Research minimum:
 - Average reviews
 
 Voice:
-Smart friend helping someone make a buying decision on a product that is trending or expensive but not a lot of reviews - you're the "one who knows about it" 
+Smart friend helping someone make a buying decision on a product that is trending or expensive but not a lot of reviews - you're the "one who knows about it."
+
+Writing rhythm:
+- Avoid long paragraph blocks.
+- Use short paragraphs, natural mini-lists, and one-line emphasis where helpful.
+- Break product workflows into scannable steps.
+- Keep the tone like a smart friend explaining what matters.
+- Use informal but useful phrases such as:
+  "The pitch is simple:"
+  "The catch:"
+  "The buyer question:"
+  "Where this gets tricky:"
+  "What I would compare next:"
+- A good QuietTrends rhythm is:
+  Paragraph.
+  Short punchy line.
+  Mini-list.
+  Paragraph.
+  Buyer takeaway.
+
+Signal layout guidance:
+- Keep the top signal treatment small.
+- Use a compact Signal Snapshot after Executive Summary for the fancy factor.
+- Put deeper signal-source analysis, buyer questions, and SEO-rich signal language inside Opportunity Analysis.
+- Avoid large charts at the top of the article unless the chart directly helps the buying decision.
+- If using Chart.js later, place charts inside Opportunity Analysis and wrap the canvas in a fixed-height chart shell.
 
 -->
 
@@ -33,6 +66,7 @@ Smart friend helping someone make a buying decision on a product that is trendin
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signal Dossier Template // QuietTrends</title>
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/article-enhancements.css">
 </head>
 <body>
 
@@ -50,7 +84,7 @@ Smart friend helping someone make a buying decision on a product that is trendin
     </header>
 
     <main>
-        <!-- Hero Layout-->
+        <!-- Hero Layout -->
         <section class="article-hero-container">
             <div class="article-hero-image-frame">
                 <img src="assets/images/products/placeholder-image.jpeg" alt="[Product Image Placeholder]" class="article-main-img">
@@ -78,105 +112,138 @@ Smart friend helping someone make a buying decision on a product that is trendin
             </div>
         </section>
 
-        <!-- Main Body Content Block -->
         <div class="article-body-content">
             
-            <!-- Executive Summary Section
-            
-             Executive Summary
-                
+            <!-- Executive Summary
                 Answer:
                 1. What is the buyer trying to decide?
                 2. What is the most important thing we learned?
                 3. What remains uncertain?
                 4. What should the buyer compare next?
-                
-                2-4 paragraphs maximum.
+
+                2-4 short paragraphs maximum.
                 Avoid repeating specifications.
-            
+                Use at least one short, conversational sentence where helpful.
             -->
             <section class="body-section-block">
                 <h2>Executive Summary</h2>
                 <p>
-                    The system loops parsed community descriptions and raw performance telemetry here. This structural blueprint evaluates product data trends, raw engineering tradeoffs, and early value signals before marketing entities draft official campaigns[cite: 1].
+                    [Start with the buyer decision, not the feature list. Example: This product is really for someone deciding whether convenience is worth giving up some control.]
                 </p>
+                <p class="qt-short-line">[Short punchy line. Example: The tradeoff is the story.]</p>
                 <p style="margin-top: 1rem;">
-                    At its current price point of $[PRICE], the [PRODUCT NAME] offers what we calculate to be the highest value-per-dollar ratio in its target category. Our Opportunity Score reflects both the objective quality and the pricing anomaly that currently exists.
+                    [Explain the key finding and uncertainty in plain English.]
                 </p>
             </section>
 
-            <!-- RECOMMENDED FOR CALLOUT BOX 
-                    
-                    Describe the ideal buyer.
-                    
-                    Examples:
-                    - Busy professionals
-                    - Frequent travelers
-                    - Coffee enthusiasts
-                    - Apartment dwellers -->
-            
+            <!-- Small Signal Snapshot
+                Keep this compact.
+                This is the fancy factor at the top, not the whole signal analysis.
+                Save detailed source discussion for Opportunity Analysis.
+            -->
+            <section class="body-section-block qt-signal-snapshot">
+                <div class="qt-signal-snapshot-grid">
+                    <div class="qt-signal-snapshot-item primary">
+                        <span>QuietTrends signal</span>
+                        <strong>[Coverage Gap Detected]</strong>
+                    </div>
+                    <div class="qt-signal-snapshot-item">
+                        <span>Buyer curiosity</span>
+                        <strong>[High]</strong>
+                    </div>
+                    <div class="qt-signal-snapshot-item">
+                        <span>Review saturation</span>
+                        <strong>[Thin]</strong>
+                    </div>
+                    <div class="qt-signal-snapshot-item">
+                        <span>Owner data</span>
+                        <strong>[Developing]</strong>
+                    </div>
+                    <div class="qt-signal-snapshot-item">
+                        <span>Decision risk</span>
+                        <strong>[Medium]</strong>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommended For
+                Describe the ideal buyer.
+                Use direct buyer language.
+            -->
             <section class="recommendation-box">
                 <h3 class="recommendation-title">RECOMMENDED FOR</h3>
                 <p class="recommendation-intro">
-                    The ideal buyer values substance over hype and is comfortable purchasing from a lesser-known brand in exchange for objectively superior specifications at a lower price point.
+                    [The ideal buyer description in one friendly paragraph.]
                 </p>
                 <ul class="recommendation-list">
-                    <li><span class="plus-sign">+</span> [Target Segment Audience Attribute 1]</li>
-                    <li><span class="plus-sign">+</span> [Technical / Performance Requirement Key Feature 2]</li>
-                    <li><span class="plus-sign">+</span> [Specific Practical Core User Priority Metric 3]</li>
-                    <li><span class="plus-sign">+</span> [Early Adopter / Market Position Advantage 4]</li>
+                    <li><span class="plus-sign">+</span> [Target segment audience attribute 1]</li>
+                    <li><span class="plus-sign">+</span> [Technical / performance requirement key feature 2]</li>
+                    <li><span class="plus-sign">+</span> [Specific practical user priority 3]</li>
+                    <li><span class="plus-sign">+</span> [Market position / early adopter advantage 4]</li>
                 </ul>
                 <a href="#" class="secondary-price-btn" target="_blank" rel="noopener">CHECK PRICE ON AMAZON &rarr;</a>
             </section>
 
-            <!-- DEEP DIVE BLOCK 
-            
-                 Main Analysis Area
-                
-                Use research-driven sections.
-                
-                Choose section titles based on the product.
-                
-                Examples:
-                
-                Comparison article:
-                - Biggest Differences
-                - Performance
-                - Ownership Tradeoffs
-                - Value
-                
-                Single product article:
-                - Key Features and What We Like
-                - Potential Drawbacks
-                - Owner Feedback
-                - Buying Considerations
-                
-                Use as many subsections as necessary.
-                Do not force specific headings.
+            <!-- Deep Dive
+                Main analysis area.
+                Use product-specific headings.
+                Avoid wall-of-text sections.
+                Break workflows into mini-lists when natural.
+
+                Example:
+                <p>The pitch is simple:</p>
+                <ul class="qt-mini-list">
+                    <li>Pick the drink you want.</li>
+                    <li>Let the machine grind the beans.</li>
+                    <li>Let it brew.</li>
+                    <li>Let the frother handle the milk.</li>
+                    <li>Walk away with something close to a cafe drink.</li>
+                </ul>
+
+                Good subsection types:
+                - What the product is really selling
+                - Where the product shines
+                - The catch
+                - Buyer tradeoffs
+                - What I would compare next
             -->
             <section class="body-section-block">
                 <h2>Deep Dive</h2>
                 <div class="dive-subsection">
                     <h3>[Key Component / Feature Bracket Name]</h3>
                     <p>
-                        Comprehensive engineering deconstruction goes here. The model maps automated data strings, component blueprints, hardware test thresholds, and specialized architectural variations observed across isolated developer groups.
+                        [Short setup paragraph.]
+                    </p>
+                    <p class="qt-short-line">[Optional punchy line.]</p>
+                    <ul class="qt-mini-list">
+                        <li>[Natural list item 1]</li>
+                        <li>[Natural list item 2]</li>
+                        <li>[Natural list item 3]</li>
+                    </ul>
+                    <p class="qt-takeaway">
+                        <strong>Buyer takeaway:</strong> [Plain-English guidance.]
                     </p>
                 </div>
             </section>
 
-            <!-- OPPORTUNITY ANALYSIS SECTION
-             QuietTrends Opportunity Analysis
-                
+            <!-- Opportunity Analysis
+                This is where the QuietTrends signal system should live.
                 Discuss:
-                
                 - Review count
                 - Review quality
                 - Buyer confusion
                 - Market positioning
                 - Competitive landscape
                 - Why this product deserves attention
-                
-                This section should feel unique to QuietTrends.
+                - Assimilated signal sources
+                - Unanswered buyer questions
+
+                SEO note:
+                Use natural phrases buyers might search, such as:
+                - Is [product] worth it?
+                - Is [product] better than [competitor]?
+                - Can [product] replace [common use case]?
+                - Is [product] real [category] or mostly convenience?
             -->
             <section class="body-section-block opportunity-analysis-block">
                 <div class="center-btn-wrapper">
@@ -184,41 +251,49 @@ Smart friend helping someone make a buying decision on a product that is trendin
                 </div>
                 <h2>Opportunity Analysis</h2>
                 <p>
-                    The gap between the [PRODUCT NAME]'s objective performance and its market visibility is one of the largest we've measured in this category this quarter. With limited visibility and low review counts on retail channels, this product sits in a pricing sweet spot that typically doesn't last once algorithmic discovery kicks in.
+                    [Explain why this product fits QuietTrends: expensive, interesting, buyer-confusing, under-reviewed, or better discussed in scattered places than in mainstream review sites.]
                 </p>
-                <p style="margin-top: 1rem;">
-                    Historical data from similar products suggests a 60–90 day window before either an upward price correction or a surge in competitive awareness occurs. For buyers who act within this window, it represents a substantial value arbitrage compared to functionally equivalent alternatives.
+
+                <h3 style="margin-top: 1.5rem;">Assimilated Signal Sources</h3>
+                <ul class="qt-signal-source-list">
+                    <li><strong>Manufacturer</strong>[What the brand claims and how strong that claim is.]</li>
+                    <li><strong>Professional reviews</strong>[What early reviewers agree or disagree on.]</li>
+                    <li><strong>YouTube demos</strong>[What video evidence helps with.]</li>
+                    <li><strong>Amazon owners</strong>[What live buyer feedback can confirm or still cannot confirm.]</li>
+                    <li><strong>Reddit chatter</strong>[What buyers are confused about or comparing.]</li>
+                </ul>
+
+                <h3 style="margin-top: 1.5rem;">Unanswered Buyer Questions</h3>
+                <div class="qt-question-stream">
+                    <div><span>SIGNAL 01</span>[Natural search-style buyer question.]</div>
+                    <div><span>SIGNAL 02</span>[Natural search-style buyer question.]</div>
+                    <div><span>SIGNAL 03</span>[Natural search-style buyer question.]</div>
+                </div>
+
+                <p class="qt-takeaway" style="margin-top: 1.5rem;">
+                    <strong>QuietTrends read:</strong> [Final opportunity read in one clear paragraph.]
                 </p>
             </section>
 
-            <!-- FINAL VERDICT PANEL BOX 
+            <!-- Final Verdict
               Allowed verdicts only:
-                        
-                        Buy Now
-                        Compare First
-                        Watch
-                        Wait for More Reviews
-                        Avoid for Now
-                        
-                        Provide:
-                        1. Verdict
-                        2. One-sentence explanation
-                        3. Final buyer guidance
-                        
-                        Keep concise.
-            
-             -->
+                Buy Now
+                Compare First
+                Watch
+                Wait for More Reviews
+                Avoid for Now
+            -->
             <section class="verdict-panel">
                 <p class="verdict-label-mini">OUR VERDICT</p>
-                <h2 class="verdict-title-main">[BUY / WATCH / AVOID]</h2>
+                <h2 class="verdict-title-main">[BUY NOW / COMPARE FIRST / WATCH / WAIT FOR MORE REVIEWS / AVOID FOR NOW]</h2>
                 <p class="verdict-product-sub"><em>[Product Name Placement]</em></p>
                 
                 <p class="verdict-explanation">
-                    [Insert a single-sentence explanation framing the structural market discovery and value positioning here.]
+                    [One-sentence explanation.]
                 </p>
                 
                 <p class="verdict-guidance">
-                    <strong>Final Buyer Guidance:</strong> [Insert concise final guidance regarding purchase window timeline thresholds and alternative evaluations here.]
+                    <strong>Final Buyer Guidance:</strong> [Concise final guidance on who should buy, compare, wait, or avoid.]
                 </p>
 
                 <div class="center-btn-wrapper" style="margin-top: 2rem;">
