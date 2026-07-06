@@ -1,122 +1,55 @@
 <!DOCTYPE html>
-<!--
-
-QUIETTRENDS ARTICLE TEMPLATE
-
-Populate content only.
-
-Do not modify:
-- Layout
-- CSS
-- Class names
-- Structure
-
-Replaceonly placeholder content.
-
-Research minimum:
-- Manufacturer
-- Amazon
-- Reddit
-- YouTube
-- Professional review source
-- Number of reviews
-- Average reviews
-
-Voice:
-Smart friend helping someone make a buying decision on a product that is trending or expensive but not a lot of reviews - you're the "one who knows about it" 
-
--->
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ninja AutoBarista Pro System Review // QuietTrends</title>
     <link rel="stylesheet" href="assets/css/styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        .signal-map-block {
+        .signal-snapshot {
             border: 1px solid rgba(0, 255, 255, 0.18);
-            background: radial-gradient(circle at top left, rgba(0, 255, 255, 0.08), rgba(4, 8, 18, 0.88) 42%);
-            box-shadow: 0 0 32px rgba(0, 255, 255, 0.07);
+            background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(4, 8, 18, 0.88));
+            box-shadow: 0 0 28px rgba(0, 255, 255, 0.06);
+            padding: 1.15rem;
         }
-
-        .signal-map-header {
-            display: flex;
-            justify-content: space-between;
-            gap: 1.5rem;
-            align-items: flex-start;
-            margin-bottom: 1.75rem;
-        }
-
-        .signal-kicker {
-            color: #00f0ff;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            font-size: 0.78rem;
-            font-weight: 800;
-            margin-bottom: 0.7rem;
-        }
-
-        .signal-status-pill {
-            display: inline-flex;
-            align-items: center;
-            border: 1px solid rgba(56, 255, 32, 0.45);
-            color: #38ff20;
-            padding: 0.55rem 0.8rem;
-            border-radius: 999px;
-            font-family: monospace;
-            font-size: 0.78rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            white-space: nowrap;
-        }
-
-        .signal-grid {
+        .signal-snapshot-grid {
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            align-items: start;
+            grid-template-columns: 1.25fr repeat(4, minmax(0, 1fr));
+            gap: 0.75rem;
+            align-items: stretch;
         }
-
-        .signal-chart-card,
-        .signal-detail-card {
-            background: rgba(3, 8, 18, 0.72);
+        .signal-snapshot-item {
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 1.25rem;
-            overflow: hidden;
+            background: rgba(0, 0, 0, 0.24);
+            border-radius: 10px;
+            padding: 0.85rem;
         }
-
-        .signal-chart-shell {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            max-height: 300px;
-        }
-
-        .signal-chart-shell canvas {
+        .signal-snapshot-item span {
             display: block;
-            width: 100% !important;
-            height: 100% !important;
+            color: rgba(255, 255, 255, 0.55);
+            font-family: monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 0.35rem;
         }
-
-        .signal-detail-card h3,
-        .signal-chart-card h3 {
+        .signal-snapshot-item strong {
+            display: block;
             color: #ffffff;
-            margin-bottom: 0.8rem;
             font-size: 1.05rem;
+            line-height: 1.15;
         }
-
+        .signal-snapshot-item.primary strong {
+            color: #38ff20;
+        }
         .signal-source-list {
             list-style: none;
             padding: 0;
-            margin: 0;
+            margin: 1rem 0 0;
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 0.9rem;
         }
-
         .signal-source-list li {
             border-left: 3px solid #00f0ff;
             padding-left: 0.85rem;
@@ -124,7 +57,6 @@ Smart friend helping someone make a buying decision on a product that is trendin
             font-size: 0.95rem;
             line-height: 1.55;
         }
-
         .signal-source-list strong {
             color: #ffffff;
             display: block;
@@ -133,50 +65,11 @@ Smart friend helping someone make a buying decision on a product that is trendin
             text-transform: uppercase;
             margin-bottom: 0.15rem;
         }
-
-        .coverage-gap-panel {
-            margin-top: 1.5rem;
-            display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 1rem;
-        }
-
-        .coverage-gap-card {
-            background: rgba(0, 0, 0, 0.28);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 1rem;
-        }
-
-        .coverage-gap-card span {
-            color: rgba(255, 255, 255, 0.52);
-            display: block;
-            font-family: monospace;
-            font-size: 0.72rem;
-            letter-spacing: 0.16em;
-            text-transform: uppercase;
-            margin-bottom: 0.4rem;
-        }
-
-        .coverage-gap-card strong {
-            color: #ffffff;
-            display: block;
-            font-size: 1.8rem;
-            line-height: 1;
-        }
-
-        .coverage-gap-card p {
-            margin-top: 0.65rem;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.68);
-        }
-
         .question-stream {
-            margin-top: 1.5rem;
+            margin-top: 1.25rem;
             display: grid;
             gap: 0.7rem;
         }
-
         .question-stream div {
             font-family: monospace;
             color: rgba(255, 255, 255, 0.75);
@@ -185,27 +78,14 @@ Smart friend helping someone make a buying decision on a product that is trendin
             border-radius: 9px;
             padding: 0.75rem 0.9rem;
         }
-
         .question-stream span {
             color: #38ff20;
             margin-right: 0.55rem;
         }
-
         @media (max-width: 900px) {
-            .signal-map-header,
-            .coverage-gap-panel,
+            .signal-snapshot-grid,
             .signal-source-list {
                 grid-template-columns: 1fr;
-                display: grid;
-            }
-
-            .signal-status-pill {
-                justify-self: start;
-            }
-
-            .signal-chart-shell {
-                height: 340px;
-                max-height: 340px;
             }
         }
     </style>
@@ -226,7 +106,6 @@ Smart friend helping someone make a buying decision on a product that is trendin
     </header>
 
     <main>
-        <!-- Hero Layout-->
         <section class="article-hero-container">
             <div class="article-hero-image-frame">
                 <img src="assets/images/products/ninja-autobarista-pro.jpeg" alt="Ninja AutoBarista Pro System" class="article-main-img">
@@ -236,103 +115,37 @@ Smart friend helping someone make a buying decision on a product that is trendin
                 <p class="article-sys-category">PRODUCT ANALYSIS — AUTOMATIC ESPRESSO</p>
                 <h1>Ninja AutoBarista Pro System</h1>
                 <p class="article-subtitle"><em>The push-button espresso machine for people who want the cafe ritual removed, not romanticized.</em></p>
-                
-                <div class="article-score-display">
-                    <span class="score-number">8.6</span>
-                </div>
-
+                <div class="article-score-display"><span class="score-number">8.6</span></div>
                 <p class="article-sys-label-caps">OPPORTUNITY</p>
-                
                 <a href="https://www.amazon.com/dp/PLACEHOLDER?tag=quiettrends-20" class="secure-price-btn" target="_blank" rel="noopener">
-                    VIEW CURRENT MARKET PRICE 
+                    VIEW CURRENT MARKET PRICE
                     <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none" style="margin-left: 6px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                 </a>
-
-                <p class="article-disclaimer">
-                    QuietTrends may earn a commission when you purchase through links on this site. This helps support our research at no additional cost to you.
-                </p>
+                <p class="article-disclaimer">QuietTrends may earn a commission when you purchase through links on this site. This helps support our research at no additional cost to you.</p>
             </div>
         </section>
 
-        <!-- Main Body Content Block -->
         <div class="article-body-content">
-            
             <section class="body-section-block">
                 <h2>Executive Summary</h2>
-                <p>
-                    The Ninja AutoBarista Pro is aimed at a very specific buyer: someone who wants espresso, drip coffee, iced drinks, and milk drinks without learning dose, tamp, grind, puck prep, shot timing, or steam technique. It is not trying to be a Breville-style hobby machine. It is trying to be the machine that replaces the morning coffee shop stop for a household where convenience matters more than barista control.
-                </p>
-                <p style="margin-top: 1rem;">
-                    The strongest signal is that professional coverage agrees on the same basic tension: this machine is unusually versatile and very easy to use, but it may not satisfy espresso purists. TechRadar came away positive on the one-touch drink system, 9-bar espresso, swappable bean hoppers, and customization. Tom's Guide was much more cautious, calling the machine ambitious but noting weak espresso and poor cold brew results. That split is useful: the product is probably better judged as a premium convenience machine than as a precision espresso instrument.
-                </p>
-                <p style="margin-top: 1rem;">
-                    At roughly the $949 / £899 launch tier reported by multiple outlets, the AutoBarista Pro sits below many luxury super-automatic machines while still being expensive enough that buyers should compare carefully. The next comparison should be against the De'Longhi Rivelia, De'Longhi Magnifica Evo, Philips LatteGo models, and Ninja's own lower-cost AutoBarista if you do not need the Pro's extra drink options or dual-hopper flexibility.
-                </p>
+                <p>The Ninja AutoBarista Pro is aimed at a very specific buyer: someone who wants espresso, drip coffee, iced drinks, and milk drinks without learning dose, tamp, grind, puck prep, shot timing, or steam technique. It is not trying to be a Breville-style hobby machine. It is trying to be the machine that replaces the morning coffee shop stop for a household where convenience matters more than barista control.</p>
+                <p style="margin-top: 1rem;">The strongest signal is that professional coverage agrees on the same basic tension: this machine is unusually versatile and very easy to use, but it may not satisfy espresso purists. TechRadar came away positive on the one-touch drink system, 9-bar espresso, swappable bean hoppers, and customization. Tom's Guide was much more cautious, calling the machine ambitious but noting weak espresso and poor cold brew results. That split is useful: the product is probably better judged as a premium convenience machine than as a precision espresso instrument.</p>
+                <p style="margin-top: 1rem;">At roughly the $949 / £899 launch tier reported by multiple outlets, the AutoBarista Pro sits below many luxury super-automatic machines while still being expensive enough that buyers should compare carefully. The next comparison should be against the De'Longhi Rivelia, De'Longhi Magnifica Evo, Philips LatteGo models, and Ninja's own lower-cost AutoBarista if you do not need the Pro's extra drink options or dual-hopper flexibility.</p>
             </section>
 
-            <section class="body-section-block signal-map-block">
-                <div class="signal-map-header">
-                    <div>
-                        <p class="signal-kicker">QuietTrends Signal Intercept</p>
-                        <h2>Where the Ninja AutoBarista Pro signal is coming from</h2>
-                        <p>
-                            QuietTrends looks for products where buyer curiosity is louder than the mainstream review footprint. This chart is an editorial signal map, not a scraped count. It shows how much useful decision-making evidence each source currently contributes.
-                        </p>
-                    </div>
-                    <span class="signal-status-pill">Coverage Gap Detected</span>
-                </div>
-
-                <div class="signal-grid">
-                    <div class="signal-chart-card">
-                        <h3>Signal strength by source</h3>
-                        <div class="signal-chart-shell">
-                            <canvas id="signalStrengthChart" aria-label="Signal strength chart for Ninja AutoBarista Pro"></canvas>
-                        </div>
-                    </div>
-                    <div class="signal-detail-card">
-                        <h3>Assimilated sources</h3>
-                        <ul class="signal-source-list">
-                            <li><strong>Manufacturer</strong>Strong feature claims around one-touch cafe drinks, bean-to-cup automation, swappable hoppers, and automatic milk frothing.</li>
-                            <li><strong>Professional reviews</strong>Useful but split. Convenience is praised; espresso intensity and cold-drink performance are still debated.</li>
-                            <li><strong>YouTube demos</strong>Good for watching workflow, drink setup, and counter presence. Less useful for long-term reliability.</li>
-                            <li><strong>Amazon owners</strong>High-value signal once mature, but early listings need live review-count and negative-review checks before purchase.</li>
-                            <li><strong>Reddit chatter</strong>Useful for buyer confusion: Ninja versus De'Longhi, Breville, Philips, and whether this can replace a coffee-shop habit.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="coverage-gap-panel">
-                    <div class="coverage-gap-card">
-                        <span>Buyer curiosity</span>
-                        <strong>High</strong>
-                        <p>Expensive countertop appliance, recognizable brand, and a clear daily-use promise.</p>
-                    </div>
-                    <div class="coverage-gap-card">
-                        <span>Review saturation</span>
-                        <strong>Thin</strong>
-                        <p>Early professional coverage exists, but buyer-specific comparisons remain underdeveloped.</p>
-                    </div>
-                    <div class="coverage-gap-card">
-                        <span>QuietTrends opportunity</span>
-                        <strong>8.6</strong>
-                        <p>The gap is not whether the machine exists. The gap is whether buyers understand the tradeoff.</p>
-                    </div>
-                </div>
-
-                <div class="question-stream">
-                    <div><span>SIGNAL 01</span>Can this replace a daily Starbucks habit?</div>
-                    <div><span>SIGNAL 02</span>Is Ninja credible against De'Longhi and Breville?</div>
-                    <div><span>SIGNAL 03</span>Is the espresso strong enough, or mainly good under milk?</div>
-                    <div><span>SIGNAL 04</span>Will the milk system still feel easy after 90 days?</div>
-                    <div><span>SIGNAL 05</span>Is the Pro worth the premium over the standard AutoBarista?</div>
+            <section class="body-section-block signal-snapshot">
+                <div class="signal-snapshot-grid">
+                    <div class="signal-snapshot-item primary"><span>QuietTrends signal</span><strong>Coverage Gap Detected</strong></div>
+                    <div class="signal-snapshot-item"><span>Buyer curiosity</span><strong>High</strong></div>
+                    <div class="signal-snapshot-item"><span>Review saturation</span><strong>Thin</strong></div>
+                    <div class="signal-snapshot-item"><span>Owner data</span><strong>Developing</strong></div>
+                    <div class="signal-snapshot-item"><span>Decision risk</span><strong>Medium</strong></div>
                 </div>
             </section>
 
             <section class="recommendation-box">
                 <h3 class="recommendation-title">RECOMMENDED FOR</h3>
-                <p class="recommendation-intro">
-                    The ideal buyer wants a serious countertop coffee appliance, but does not want espresso to become a second hobby.
-                </p>
+                <p class="recommendation-intro">The ideal buyer wants a serious countertop coffee appliance, but does not want espresso to become a second hobby.</p>
                 <ul class="recommendation-list">
                     <li><span class="plus-sign">+</span> Busy households replacing daily cafe drinks</li>
                     <li><span class="plus-sign">+</span> Latte, cappuccino, flat white, and iced-drink fans</li>
@@ -344,198 +157,57 @@ Smart friend helping someone make a buying decision on a product that is trendin
 
             <section class="body-section-block">
                 <h2>Deep Dive</h2>
-                <div class="dive-subsection">
-                    <h3>What Ninja Is Really Selling</h3>
-                    <p>
-                        The AutoBarista Pro combines a bean-to-cup espresso machine, drip coffee maker, rapid cold-brew style function, grinder calibration, and automatic milk frothing into one appliance. The pitch is simple: choose a drink, let the machine grind and brew, then let the frother handle dairy or plant-based milk. The Pro model's strongest differentiators are its expanded drink menu, dual-shot capability, two interchangeable bean hoppers, pre-ground coffee chute, and saved user profiles.
-                    </p>
-                </div>
-                <div class="dive-subsection">
-                    <h3>What Early Reviews Agree On</h3>
-                    <p>
-                        Reviewers broadly agree that the machine is approachable. The interface is beginner-friendly, the presets cover the drinks most people actually order, and the automatic milk system reduces the messy trial-and-error of steaming. T3 praised the customization and automation, while Livingetc positioned it as an appealing high-end option for people who want cafe-style drinks with less technique required.
-                    </p>
-                </div>
-                <div class="dive-subsection">
-                    <h3>The Espresso Question</h3>
-                    <p>
-                        This is where the buying decision gets interesting. A true espresso hobbyist usually wants manual control over grind, dose, temperature, pressure, and extraction time. The AutoBarista Pro deliberately hides much of that complexity. That makes it easier, but also means the machine has to make the right choices for you. Tom's Guide found the espresso weaker than expected, even at higher intensity settings, while TechRadar reported much stronger results after testing. QuietTrends reads that split as a bean-and-expectation problem: casual latte drinkers may be pleased, but straight-espresso drinkers should compare first.
-                    </p>
-                </div>
-                <div class="dive-subsection">
-                    <h3>Milk Drinks Are the Safer Bet</h3>
-                    <p>
-                        The strongest use case is milk-based coffee. If your routine is latte, cappuccino, flat white, iced latte, or flavored drinks, the machine's convenience matters more than whether the espresso shot has the body and concentration a manual machine can produce. The automated frothing system, milk presets, and dairy / plant-based milk support make the AutoBarista Pro feel more practical for mixed-preference households than a traditional espresso setup.
-                    </p>
-                </div>
-                <div class="dive-subsection">
-                    <h3>Cold Brew and Cold Foam Need Caution</h3>
-                    <p>
-                        The cold-drink promise is attractive, but this is the least settled part of the product story. Tom's Guide was notably unimpressed by the cold brew and cold foam performance. If cold coffee is your main reason for buying, this should not be an impulse purchase. A dedicated cold-brew method, a Ninja Luxe Cafe variant, or a simpler iced coffee workflow may be a better value.
-                    </p>
-                </div>
-                <div class="dive-subsection">
-                    <h3>Maintenance May Be the Hidden Advantage</h3>
-                    <p>
-                        Automatic coffee machines often lose their charm when cleaning becomes awkward. Ninja appears to understand that problem. Coverage highlighted removable and dishwasher-safe components, including pieces that are often annoying to clean on super-automatic machines, plus automatic rinsing and an internal drying approach intended to reduce moisture buildup. That matters because the long-term ownership experience of a fully automatic machine is usually determined by cleaning discipline, not just first-week drink quality.
-                    </p>
-                </div>
-                <div class="dive-subsection">
-                    <h3>Research Signals Used</h3>
-                    <p>
-                        This analysis reviewed manufacturer positioning, Amazon listing intent using a placeholder affiliate target, early professional reviews, launch coverage, Reddit / YouTube availability signals, and comparison context against De'Longhi, Philips, KitchenAid, Jura, and Ninja's own lower-priced AutoBarista. Because Amazon review counts and average ratings can change quickly on newly launched appliances, buyers should verify the live Amazon rating and recent negative reviews before purchase.
-                    </p>
-                </div>
+                <div class="dive-subsection"><h3>What Ninja Is Really Selling</h3><p>The AutoBarista Pro combines a bean-to-cup espresso machine, drip coffee maker, rapid cold-brew style function, grinder calibration, and automatic milk frothing into one appliance. The pitch is simple: choose a drink, let the machine grind and brew, then let the frother handle dairy or plant-based milk. The Pro model's strongest differentiators are its expanded drink menu, dual-shot capability, two interchangeable bean hoppers, pre-ground coffee chute, and saved user profiles.</p></div>
+                <div class="dive-subsection"><h3>What Early Reviews Agree On</h3><p>Reviewers broadly agree that the machine is approachable. The interface is beginner-friendly, the presets cover the drinks most people actually order, and the automatic milk system reduces the messy trial-and-error of steaming. T3 praised the customization and automation, while Livingetc positioned it as an appealing high-end option for people who want cafe-style drinks with less technique required.</p></div>
+                <div class="dive-subsection"><h3>The Espresso Question</h3><p>This is where the buying decision gets interesting. A true espresso hobbyist usually wants manual control over grind, dose, temperature, pressure, and extraction time. The AutoBarista Pro deliberately hides much of that complexity. That makes it easier, but also means the machine has to make the right choices for you. Tom's Guide found the espresso weaker than expected, even at higher intensity settings, while TechRadar reported much stronger results after testing. QuietTrends reads that split as a bean-and-expectation problem: casual latte drinkers may be pleased, but straight-espresso drinkers should compare first.</p></div>
+                <div class="dive-subsection"><h3>Milk Drinks Are the Safer Bet</h3><p>The strongest use case is milk-based coffee. If your routine is latte, cappuccino, flat white, iced latte, or flavored drinks, the machine's convenience matters more than whether the espresso shot has the body and concentration a manual machine can produce. The automated frothing system, milk presets, and dairy / plant-based milk support make the AutoBarista Pro feel more practical for mixed-preference households than a traditional espresso setup.</p></div>
+                <div class="dive-subsection"><h3>Cold Brew and Cold Foam Need Caution</h3><p>The cold-drink promise is attractive, but this is the least settled part of the product story. Tom's Guide was notably unimpressed by the cold brew and cold foam performance. If cold coffee is your main reason for buying, this should not be an impulse purchase. A dedicated cold-brew method, a Ninja Luxe Cafe variant, or a simpler iced coffee workflow may be a better value.</p></div>
+                <div class="dive-subsection"><h3>Maintenance May Be the Hidden Advantage</h3><p>Automatic coffee machines often lose their charm when cleaning becomes awkward. Ninja appears to understand that problem. Coverage highlighted removable and dishwasher-safe components, including pieces that are often annoying to clean on super-automatic machines, plus automatic rinsing and an internal drying approach intended to reduce moisture buildup. That matters because the long-term ownership experience of a fully automatic machine is usually determined by cleaning discipline, not just first-week drink quality.</p></div>
             </section>
 
             <section class="body-section-block opportunity-analysis-block">
-                <div class="center-btn-wrapper">
-                    <a href="https://www.amazon.com/dp/PLACEHOLDER?tag=quiettrends-20" class="action-deal-btn" target="_blank" rel="noopener">VIEW LATEST DEALS &rarr;</a>
-                </div>
+                <div class="center-btn-wrapper"><a href="https://www.amazon.com/dp/PLACEHOLDER?tag=quiettrends-20" class="action-deal-btn" target="_blank" rel="noopener">VIEW LATEST DEALS &rarr;</a></div>
                 <h2>Opportunity Analysis</h2>
-                <p>
-                    The Ninja AutoBarista Pro is a strong QuietTrends candidate because the search intent is likely to grow faster than the review ecosystem. It is expensive, visually distinctive, and attached to a trusted mass-market kitchen brand, but the buying decision is complicated: shoppers need to understand the difference between a super-automatic convenience machine, a semi-automatic espresso machine, and cheaper all-in-one coffee centers.
-                </p>
-                <p style="margin-top: 1rem;">
-                    The buyer confusion is the opportunity. People searching this product are not just asking whether it makes coffee. They are asking whether it can replace Starbucks, whether it is better than De'Longhi, whether Ninja can really do espresso, whether the milk system is easier to clean, and whether the Pro features justify the premium over the standard AutoBarista. Most short product pages will not answer those questions well.
-                </p>
-                <p style="margin-top: 1rem;">
-                    Review quality is early but useful. Professional reviewers have already surfaced the core tradeoff: convenience and versatility are excellent, while espresso intensity and cold-drink performance may vary by reviewer, bean, and expectation. Amazon owner feedback should be treated as developing signal rather than final consensus until the listing has a deeper review base and enough long-term comments about reliability, cleaning, descaling, grinder behavior, and milk-system maintenance.
-                </p>
-                <p style="margin-top: 1rem;">
-                    QuietTrends score: 8.6. The product deserves attention because it lives in a profitable, high-intent category where buyers are nervous about spending close to $1,000 and hungry for plain-English guidance. It is not an automatic Buy Now for everyone, but it is exactly the kind of under-explained product where a careful review can help a buyer avoid the wrong machine.
-                </p>
+                <p>The Ninja AutoBarista Pro is a strong QuietTrends candidate because the search intent is likely to grow faster than the review ecosystem. It is expensive, visually distinctive, and attached to a trusted mass-market kitchen brand, but the buying decision is complicated: shoppers need to understand the difference between a super-automatic convenience machine, a semi-automatic espresso machine, and cheaper all-in-one coffee centers.</p>
+                <p style="margin-top: 1rem;">The buyer confusion is the opportunity. People searching this product are not just asking whether it makes coffee. They are asking whether it can replace Starbucks, whether it is better than De'Longhi, whether Ninja can really do espresso, whether the milk system is easier to clean, and whether the Pro features justify the premium over the standard AutoBarista. Most short product pages will not answer those questions well.</p>
+                <h3 style="margin-top: 1.5rem;">Assimilated Signal Sources</h3>
+                <ul class="signal-source-list">
+                    <li><strong>Manufacturer</strong>Strong feature claims around one-touch cafe drinks, bean-to-cup automation, swappable hoppers, and automatic milk frothing.</li>
+                    <li><strong>Professional reviews</strong>Useful but split. Convenience is praised; espresso intensity and cold-drink performance are still debated.</li>
+                    <li><strong>YouTube demos</strong>Good for workflow, drink setup, and counter presence. Less useful for long-term reliability.</li>
+                    <li><strong>Amazon owners</strong>High-value signal once mature, but early listings need live review-count and negative-review checks before purchase.</li>
+                    <li><strong>Reddit chatter</strong>Useful for buyer confusion: Ninja versus De'Longhi, Breville, Philips, and whether this can replace a coffee-shop habit.</li>
+                </ul>
+                <h3 style="margin-top: 1.5rem;">Unanswered Buyer Questions</h3>
+                <div class="question-stream">
+                    <div><span>SIGNAL 01</span>Can the Ninja AutoBarista Pro replace a daily Starbucks habit?</div>
+                    <div><span>SIGNAL 02</span>Is the Ninja AutoBarista Pro real espresso or mainly a milk-drink machine?</div>
+                    <div><span>SIGNAL 03</span>Is Ninja credible against De'Longhi, Breville, Philips, and Jura?</div>
+                    <div><span>SIGNAL 04</span>Will the milk system still feel easy after 90 days?</div>
+                    <div><span>SIGNAL 05</span>Is the Pro worth the premium over the standard Ninja AutoBarista?</div>
+                </div>
+                <p style="margin-top: 1.5rem;">Review quality is early but useful. Professional reviewers have already surfaced the core tradeoff: convenience and versatility are excellent, while espresso intensity and cold-drink performance may vary by reviewer, bean, and expectation. Amazon owner feedback should be treated as developing signal rather than final consensus until the listing has a deeper review base and enough long-term comments about reliability, cleaning, descaling, grinder behavior, and milk-system maintenance.</p>
+                <p style="margin-top: 1rem;">QuietTrends score: 8.6. The product deserves attention because it lives in a profitable, high-intent category where buyers are nervous about spending close to $1,000 and hungry for plain-English guidance. It is not an automatic Buy Now for everyone, but it is exactly the kind of under-explained product where a careful review can help a buyer avoid the wrong machine.</p>
             </section>
 
             <section class="verdict-panel">
                 <p class="verdict-label-mini">OUR VERDICT</p>
                 <h2 class="verdict-title-main">Compare First</h2>
                 <p class="verdict-product-sub"><em>Ninja AutoBarista Pro System</em></p>
-                
-                <p class="verdict-explanation">
-                    The AutoBarista Pro looks like a compelling convenience machine for latte-heavy households, but early review disagreement around espresso strength and cold-drink performance makes comparison shopping essential.
-                </p>
-                
-                <p class="verdict-guidance">
-                    <strong>Final Buyer Guidance:</strong> Buy it if you want one-touch variety and automated milk drinks; compare against De'Longhi, Philips LatteGo, and Ninja's standard AutoBarista if straight espresso quality, price, or cold brew performance is your top priority.
-                </p>
-
-                <div class="center-btn-wrapper" style="margin-top: 2rem;">
-                    <a href="https://www.amazon.com/dp/PLACEHOLDER?tag=quiettrends-20" class="verdict-amazon-btn" target="_blank" rel="noopener">CHECK CURRENT PRICE ON AMAZON &rarr;</a>
-                </div>
+                <p class="verdict-explanation">The AutoBarista Pro looks like a compelling convenience machine for latte-heavy households, but early review disagreement around espresso strength and cold-drink performance makes comparison shopping essential.</p>
+                <p class="verdict-guidance"><strong>Final Buyer Guidance:</strong> Buy it if you want one-touch variety and automated milk drinks; compare against De'Longhi, Philips LatteGo, and Ninja's standard AutoBarista if straight espresso quality, price, or cold brew performance is your top priority.</p>
+                <div class="center-btn-wrapper" style="margin-top: 2rem;"><a href="https://www.amazon.com/dp/PLACEHOLDER?tag=quiettrends-20" class="verdict-amazon-btn" target="_blank" rel="noopener">CHECK CURRENT PRICE ON AMAZON &rarr;</a></div>
             </section>
-
         </div>
     </main>
 
     <footer>
         <div class="footer-layout">
-            <div class="footer-brand-column">
-                <div class="logo">Quiet<span>Trends</span></div>
-                <p>Data-driven product research for the discerning buyer. We find what others overlook.</p>
-            </div>
-            <div class="footer-links-column">
-                <h5>NAVIGATE</h5>
-                <a href="index.html">Latest Reviews</a>
-                <a href="#">Compare Products</a>
-                <a href="methodology.html">Methodology</a>
-                <a href="about.html">About</a>
-            </div>
-            <div class="footer-links-column">
-                <h5>LEGAL</h5>
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Affiliate Disclosure</a>
-            </div>
+            <div class="footer-brand-column"><div class="logo">Quiet<span>Trends</span></div><p>Data-driven product research for the discerning buyer. We find what others overlook.</p></div>
+            <div class="footer-links-column"><h5>NAVIGATE</h5><a href="index.html">Latest Reviews</a><a href="#">Compare Products</a><a href="methodology.html">Methodology</a><a href="about.html">About</a></div>
+            <div class="footer-links-column"><h5>LEGAL</h5><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Affiliate Disclosure</a></div>
         </div>
         <div class="footer-copyright">&copy; 2026 QuietTrends Engine. Operating on unquantified sentiment tracking platforms.</div>
     </footer>
-
-    <script>
-        const signalCtx = document.getElementById('signalStrengthChart');
-
-        if (signalCtx && window.Chart) {
-            new Chart(signalCtx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        'Buyer curiosity',
-                        'Manufacturer claims',
-                        'YouTube demos',
-                        'Professional reviews',
-                        'Reddit chatter',
-                        'Amazon owner data',
-                        'Long-term evidence'
-                    ],
-                    datasets: [{
-                        label: 'Signal strength',
-                        data: [9, 9, 7, 6, 6, 5, 3],
-                        borderWidth: 1,
-                        borderRadius: 6,
-                        barPercentage: 0.7,
-                        categoryPercentage: 0.72,
-                        backgroundColor: 'rgba(0, 240, 255, 0.74)',
-                        hoverBackgroundColor: 'rgba(56, 255, 32, 0.88)',
-                        borderColor: 'rgba(255, 255, 255, 0.16)'
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    resizeDelay: 150,
-                    layout: {
-                        padding: {
-                            right: 10
-                        }
-                    },
-                    animation: {
-                        duration: 450
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return 'Signal strength: ' + context.raw + '/10';
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            min: 0,
-                            max: 10,
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.08)',
-                                drawBorder: false
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.62)',
-                                stepSize: 2
-                            }
-                        },
-                        y: {
-                            grid: {
-                                display: false,
-                                drawBorder: false
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.78)',
-                                autoSkip: false,
-                                font: {
-                                    family: 'monospace',
-                                    size: 11
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
-    </script>
-
 </body>
 </html>
