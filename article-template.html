@@ -12,6 +12,11 @@ Do not modify:
 
 Replace only placeholder content.
 
+Core article rule:
+- This must read as a product review first.
+- Help the buyer decide whether to buy, skip, wait, or compare.
+- Use buyer signals and review visibility as supporting evidence, not as the main subject.
+
 SEO title and hero requirement:
 - The HTML <title> must include the exact phrase "Product Review".
 - The hero <h1> must also include the exact phrase "Product Review".
@@ -31,21 +36,28 @@ Banned public article language:
 - Do not mention "worth writing about".
 - Do not mention "internal opportunity score".
 
-Reader-facing replacement language:
-- Say the product deserves a closer buyer look.
-- Explain why the decision is complex.
-- Explain what review coverage is missing.
-- Explain what buyers are comparing.
-- Explain what questions remain unanswered.
+Review-site basics required:
+- Answer "Should I buy this?" early.
+- Define who should buy it.
+- Define who should skip it.
+- Explain price tier and value logic.
+- Translate features into buyer benefits.
+- Include real-world setup, maintenance, space, noise, app, warranty, parts, or ownership friction where relevant.
+- Name alternatives or categories to compare next.
+- Identify potential deal breakers.
+- End with a bottom-line verdict with context.
 
 Recommended page flow:
 1. Hero
-2. Executive Summary
+2. Executive Summary: should you buy it?
 3. Small Signal Snapshot
-4. Recommended For
-5. Deep Dive
-6. Buyer Signal Analysis
-7. Final Verdict
+4. Best For / Skip If
+5. Price Reality Check
+6. Deep Dive: features translated into buyer benefits
+7. Real-World Ownership Check
+8. What I Would Compare Next
+9. Buyer Signal Analysis
+10. Final Verdict
 
 Research minimum:
 - Manufacturer
@@ -110,16 +122,15 @@ Signal layout guidance:
     </header>
 
     <main>
-        <!-- Hero Layout -->
         <section class="article-hero-container">
             <div class="article-hero-image-frame">
                 <img src="assets/images/products/placeholder-image.jpeg" alt="[Product Image Placeholder]" class="article-main-img">
             </div>
 
             <div class="article-hero-metadata">
-                <p class="article-sys-category">PRODUCT ANALYSIS — [CATEGORY]</p>
+                <p class="article-sys-category">PRODUCT REVIEW — [CATEGORY]</p>
                 <h1 class="article-title">[Product Name] Product Review</h1>
-                <p class="article-subtitle"><em>[The Inferred Market Phrase Nobody Reviewed]</em></p>
+                <p class="article-subtitle"><em>[Plain-English buyer decision angle]</em></p>
                 
                 <div class="article-score-display">
                     <span class="score-number">[8.4]</span>
@@ -140,33 +151,17 @@ Signal layout guidance:
 
         <div class="article-body-content">
             
-            <!-- Executive Summary
-                Answer:
-                1. What is the buyer trying to decide?
-                2. What is the most important thing we learned?
-                3. What remains uncertain?
-                4. What should the buyer compare next?
-
-                2-4 short paragraphs maximum.
-                Avoid repeating specifications.
-                Use at least one short, conversational sentence where helpful.
-            -->
             <section class="body-section-block">
                 <h2>Executive Summary</h2>
                 <p>
-                    [Start with the buyer decision, not the feature list. Example: This product is really for someone deciding whether convenience is worth giving up some control.]
+                    [Answer the buyer decision immediately. Example: Buy this if you want X. Skip it if Y matters more. Compare it against Z before deciding.]
                 </p>
                 <p class="qt-short-line">[Short punchy line. Example: The tradeoff is the story.]</p>
                 <p style="margin-top: 1rem;">
-                    [Explain the key finding and uncertainty in plain English.]
+                    [Explain the key finding, main uncertainty, and what the buyer should compare next in plain English.]
                 </p>
             </section>
 
-            <!-- Small Signal Snapshot
-                Keep this compact.
-                This is the fancy factor at the top, not the whole signal analysis.
-                Save detailed source discussion for Buyer Signal Analysis.
-            -->
             <section class="body-section-block qt-signal-snapshot">
                 <div class="qt-signal-snapshot-grid">
                     <div class="qt-signal-snapshot-item primary">
@@ -192,59 +187,47 @@ Signal layout guidance:
                 </div>
             </section>
 
-            <!-- Recommended For
-                Describe the ideal buyer.
-                Use direct buyer language.
-            -->
             <section class="recommendation-box">
-                <h3 class="recommendation-title">RECOMMENDED FOR</h3>
+                <h3 class="recommendation-title">BEST FOR</h3>
                 <p class="recommendation-intro">
-                    [The ideal buyer description in one friendly paragraph.]
+                    [The ideal buyer description in one friendly paragraph. Be specific about the use case, home/lifestyle fit, budget, and tolerance for setup or maintenance.]
                 </p>
                 <ul class="recommendation-list">
-                    <li><span class="plus-sign">+</span> [Target segment audience attribute 1]</li>
-                    <li><span class="plus-sign">+</span> [Technical / performance requirement key feature 2]</li>
-                    <li><span class="plus-sign">+</span> [Specific practical user priority 3]</li>
-                    <li><span class="plus-sign">+</span> [Market position / early adopter advantage 4]</li>
+                    <li><span class="plus-sign">+</span> [Specific buyer/use case 1]</li>
+                    <li><span class="plus-sign">+</span> [Specific buyer/use case 2]</li>
+                    <li><span class="plus-sign">+</span> [Specific buyer/use case 3]</li>
+                    <li><span class="plus-sign">+</span> [Specific buyer/use case 4]</li>
                 </ul>
                 <a href="#" class="secondary-price-btn" target="_blank" rel="noopener">CHECK PRICE ON AMAZON &rarr;</a>
             </section>
 
-            <!-- Deep Dive
-                Main analysis area.
-                Use product-specific headings.
-                Avoid wall-of-text sections.
-                Break workflows into mini-lists when natural.
-
-                Example:
-                <p>The pitch is simple:</p>
+            <section class="body-section-block">
+                <h2>Skip If</h2>
+                <p>[Explain who should not buy this product and why. This builds trust and makes the review useful.]</p>
                 <ul class="qt-mini-list">
-                    <li>Pick the drink you want.</li>
-                    <li>Let the machine grind the beans.</li>
-                    <li>Let it brew.</li>
-                    <li>Let the frother handle the milk.</li>
-                    <li>Walk away with something close to a cafe drink.</li>
+                    <li>[Deal-breaker buyer profile 1]</li>
+                    <li>[Deal-breaker buyer profile 2]</li>
+                    <li>[Deal-breaker buyer profile 3]</li>
                 </ul>
+            </section>
 
-                Good subsection types:
-                - What the product is really selling
-                - Where the product shines
-                - The catch
-                - Buyer tradeoffs
-                - What I would compare next
-            -->
+            <section class="body-section-block">
+                <h2>Price Reality Check</h2>
+                <p>[Explain whether this is budget, midrange, premium, or ultra-premium. Make the price feel concrete.]</p>
+                <p class="qt-short-line">[Example: At this price, it needs to solve more than one problem.]</p>
+                <p style="margin-top: 1rem;">[Explain what would justify the price: replacing separate products, saving time, reducing recurring costs, improving quality, or delivering a specific lifestyle benefit.]</p>
+            </section>
+
             <section class="body-section-block">
                 <h2>Deep Dive</h2>
                 <div class="dive-subsection">
-                    <h3>[Key Component / Feature Bracket Name]</h3>
-                    <p>
-                        [Short setup paragraph.]
-                    </p>
-                    <p class="qt-short-line">[Optional punchy line.]</p>
+                    <h3>[Feature / Benefit Area]</h3>
+                    <p>[Start with what the feature means for the buyer, not just the spec.]</p>
+                    <p class="qt-short-line">[Short buyer-facing translation.]</p>
                     <ul class="qt-mini-list">
-                        <li>[Natural list item 1]</li>
-                        <li>[Natural list item 2]</li>
-                        <li>[Natural list item 3]</li>
+                        <li>[Feature translated into practical benefit 1]</li>
+                        <li>[Feature translated into practical benefit 2]</li>
+                        <li>[Feature translated into practical benefit 3]</li>
                     </ul>
                     <p class="qt-takeaway">
                         <strong>Buyer takeaway:</strong> [Plain-English guidance.]
@@ -252,25 +235,27 @@ Signal layout guidance:
                 </div>
             </section>
 
-            <!-- Buyer Signal Analysis
-                This is where the QuietTrends signal system should live.
-                Discuss:
-                - Review count
-                - Review quality
-                - Buyer confusion
-                - Market positioning
-                - Competitive landscape
-                - Why this product deserves a closer buyer look
-                - Assimilated signal sources
-                - Unanswered buyer questions
+            <section class="body-section-block">
+                <h2>Real-World Ownership Check</h2>
+                <p>[Explain the ownership friction: setup, assembly, app dependence, maintenance, cleaning, noise, space, storage, replacement parts, warranty, support, or long-term wear.]</p>
+                <ul class="qt-mini-list">
+                    <li><strong>Setup:</strong> [What buyers should expect.]</li>
+                    <li><strong>Maintenance:</strong> [What buyers will have to clean, replace, refill, charge, or monitor.]</li>
+                    <li><strong>Fit:</strong> [Space, compatibility, home layout, storage, or daily-use constraints.]</li>
+                    <li><strong>Deal breaker:</strong> [The one issue that could make the product wrong for the buyer.]</li>
+                </ul>
+            </section>
 
-                SEO note:
-                Use natural phrases buyers might search, such as:
-                - Is [product] worth it?
-                - Is [product] better than [competitor]?
-                - Can [product] replace [common use case]?
-                - Is [product] real [category] or mostly convenience?
-            -->
+            <section class="body-section-block">
+                <h2>What I Would Compare Next</h2>
+                <p>[Name specific competitors or comparison categories. Do not be generic.]</p>
+                <ul class="qt-mini-list">
+                    <li><strong>[Competitor / alternative 1]:</strong> [Why compare it.]</li>
+                    <li><strong>[Competitor / alternative 2]:</strong> [Why compare it.]</li>
+                    <li><strong>[Different buying route]:</strong> [Example: custom build, cheaper model, older generation, rental/service, separate components.]</li>
+                </ul>
+            </section>
+
             <section class="body-section-block opportunity-analysis-block">
                 <div class="center-btn-wrapper">
                     <a href="#" class="action-deal-btn" target="_blank" rel="noopener">VIEW LATEST DEALS &rarr;</a>
@@ -301,25 +286,17 @@ Signal layout guidance:
                 </p>
             </section>
 
-            <!-- Final Verdict
-              Allowed verdicts only:
-                Buy Now
-                Compare First
-                Watch
-                Wait for More Reviews
-                Avoid for Now
-            -->
             <section class="verdict-panel">
                 <p class="verdict-label-mini">OUR VERDICT</p>
                 <h2 class="verdict-title-main">[BUY NOW / COMPARE FIRST / WATCH / WAIT FOR MORE REVIEWS / AVOID FOR NOW]</h2>
                 <p class="verdict-product-sub"><em>[Product Name Placement]</em></p>
                 
                 <p class="verdict-explanation">
-                    [One-sentence explanation.]
+                    [One-sentence explanation that includes context, not just the verdict label.]
                 </p>
                 
                 <p class="verdict-guidance">
-                    <strong>Final Buyer Guidance:</strong> [Concise final guidance on who should buy, compare, wait, or avoid.]
+                    <strong>Final Buyer Guidance:</strong> [Concise final guidance on who should buy, compare, wait, or avoid, plus what to compare next.]
                 </p>
 
                 <div class="center-btn-wrapper" style="margin-top: 2rem;">
