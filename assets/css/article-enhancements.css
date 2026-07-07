@@ -143,6 +143,12 @@
   height: 100% !important;
 }
 
+/* Hide unpublished feature-analysis placeholders while preserving main product images. */
+img.article-feature-img[alt*="placeholder"],
+img.article-feature-img[src*="assets/images/features/"] {
+  display: none !important;
+}
+
 @media (max-width: 900px) {
   .qt-signal-snapshot-grid,
   .qt-signal-source-list {
