@@ -1,0 +1,87 @@
+name: Remove feature image references
+
+on:
+  push:
+    paths:
+      - '.github/workflows/remove-feature-image-references.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  clean-html:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Remove feature image references and related comments
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          html_files = sorted(Path('.').rglob('*.html'), key=lambda p: str(p).lower())
+          changed = []
+
+          for path in html_files:
+              original = path.read_text(encoding='utf-8')
+              lines = original.splitlines(keepends=True)
+              remove = set()
+
+              for i, line in enumerate(lines):
+                  if 'assets/images/features/' not in line:
+                      continue
+
+                  remove.add(i)
+
+                  # Remove blank lines immediately before the image while locating
+                  # its directly attached HTML source comment.
+                  j = i - 1
+                  blanks = []
+                  while j >= 0 and not lines[j].strip():
+                      blanks.append(j)
+                      j -= 1
+
+                  if j >= 0 and '-->' in lines[j]:
+                      comment_end = j
+                      comment_start = j
+                      while comment_start >= 0 and '<!--' not in lines[comment_start]:
+                          comment_start -= 1
+                      if comment_start >= 0:
+                          for k in range(comment_start, comment_end + 1):
+                              remove.add(k)
+                          remove.update(blanks)
+
+              if not remove:
+                  continue
+
+              cleaned = ''.join(line for idx, line in enumerate(lines) if idx not in remove)
+              # Avoid excessive vertical gaps left by removed placeholders.
+              while '\n\n\n\n' in cleaned:
+                  cleaned = cleaned.replace('\n\n\n\n', '\n\n\n')
+
+              if cleaned != original:
+                  path.write_text(cleaned, encoding='utf-8')
+                  changed.append(str(path))
+
+          print('Changed files:')
+          for path in changed:
+              print(path)
+          PY
+
+      - name: Remove temporary workflow and commit cleanup
+        shell: bash
+        run: |
+          rm -f .github/workflows/remove-feature-image-references.yml
+          git config user.name "QuietTrends Cleanup"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes required."
+            exit 0
+          fi
+          git commit -m "Remove feature image references from remaining articles"
+          git push
