@@ -43,4 +43,4 @@ jobs:
           git commit -m "Add author dates and review JSON-LD [skip ci]"
           git push
 
-# Final pass: normalize doctypes and retain one Product/Review JSON-LD block per article.
+# Includes both current template reviews and legacy analysis pages.
