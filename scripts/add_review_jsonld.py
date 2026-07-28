@@ -10,37 +10,24 @@ from datetime import date, datetime
 from pathlib import Path
 from urllib.parse import quote
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Doctype
 
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDED = {"index.html", "about.html", "methodology.html", "article-template.html"}
 
 CATEGORY_AUTHORS = {
-    "electronics": "Ethan Mercer",
-    "computers": "Claire Bennett",
-    "cell phones & accessories": "Marcus Hale",
-    "home & kitchen": "Sophia Brooks",
-    "kitchen & dining": "Ryan Cole",
-    "patio, lawn & garden": "Olivia Hart",
-    "tools & home improvement": "Ethan Mercer",
-    "sports & outdoors": "Claire Bennett",
-    "automotive": "Marcus Hale",
-    "health & household": "Sophia Brooks",
-    "beauty & personal care": "Ryan Cole",
-    "baby": "Olivia Hart",
-    "pet supplies": "Ethan Mercer",
-    "office products": "Claire Bennett",
-    "toys & games": "Marcus Hale",
-    "video games": "Sophia Brooks",
-    "musical instruments": "Ryan Cole",
-    "camera & photo": "Olivia Hart",
-    "industrial & scientific": "Ethan Mercer",
-    "arts, crafts & sewing": "Claire Bennett",
-    "clothing, shoes & jewelry": "Marcus Hale",
-    "grocery & gourmet food": "Sophia Brooks",
-    "handmade": "Ryan Cole",
-    "books": "Olivia Hart",
-    "audible": "Ethan Mercer",
+    "electronics": "Ethan Mercer", "computers": "Claire Bennett",
+    "cell phones & accessories": "Marcus Hale", "home & kitchen": "Sophia Brooks",
+    "kitchen & dining": "Ryan Cole", "patio, lawn & garden": "Olivia Hart",
+    "tools & home improvement": "Ethan Mercer", "sports & outdoors": "Claire Bennett",
+    "automotive": "Marcus Hale", "health & household": "Sophia Brooks",
+    "beauty & personal care": "Ryan Cole", "baby": "Olivia Hart",
+    "pet supplies": "Ethan Mercer", "office products": "Claire Bennett",
+    "toys & games": "Marcus Hale", "video games": "Sophia Brooks",
+    "musical instruments": "Ryan Cole", "camera & photo": "Olivia Hart",
+    "industrial & scientific": "Ethan Mercer", "arts, crafts & sewing": "Claire Bennett",
+    "clothing, shoes & jewelry": "Marcus Hale", "grocery & gourmet food": "Sophia Brooks",
+    "handmade": "Ryan Cole", "books": "Olivia Hart", "audible": "Ethan Mercer",
 }
 
 CATEGORY_HINTS = [
@@ -70,8 +57,7 @@ def first_commit_date(path: Path) -> date:
     try:
         output = subprocess.check_output(
             ["git", "log", "--follow", "--diff-filter=A", "--format=%cs", "--", rel],
-            cwd=ROOT,
-            text=True,
+            cwd=ROOT, text=True,
         ).strip().splitlines()
         if output:
             return date.fromisoformat(output[-1])
@@ -132,15 +118,12 @@ def process(path: Path) -> bool:
     author = published = None
     if byline:
         author, published = parse_byline(byline.get_text(" ", strip=True))
-    if not author:
-        author = CATEGORY_AUTHORS[category]
-    if not published:
-        published = first_commit_date(path)
+    author = author or CATEGORY_AUTHORS[category]
+    published = published or first_commit_date(path)
 
     if not byline:
         byline = soup.new_tag("p", attrs={"class": "article-byline"})
-        anchor = soup.select_one(".article-subtitle") or title_node
-        anchor.insert_after(byline)
+        (soup.select_one(".article-subtitle") or title_node).insert_after(byline)
     byline.string = f"By {author}  •  {display_date(published)}"
 
     for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
@@ -168,9 +151,7 @@ def process(path: Path) -> bool:
     canonical_url = f"https://quiettrends.com/{path.name}"
 
     review = {
-        "@type": "Review",
-        "name": title_text,
-        "url": canonical_url,
+        "@type": "Review", "name": title_text, "url": canonical_url,
         "author": {"@type": "Person", "name": author},
         "publisher": {"@type": "Organization", "name": "QuietTrends", "url": "https://quiettrends.com/"},
         "datePublished": published.isoformat(),
@@ -179,12 +160,8 @@ def process(path: Path) -> bool:
         review["reviewRating"] = {"@type": "Rating", "ratingValue": score, "bestRating": "10", "worstRating": "1"}
 
     product = {
-        "@context": "https://schema.org",
-        "@type": "Product",
-        "name": product_name,
-        "url": canonical_url,
-        "brand": {"@type": "Brand", "name": brand},
-        "review": review,
+        "@context": "https://schema.org", "@type": "Product", "name": product_name,
+        "url": canonical_url, "brand": {"@type": "Brand", "name": brand}, "review": review,
     }
     if image:
         product["image"] = image
@@ -195,11 +172,12 @@ def process(path: Path) -> bool:
     script.string = json.dumps(product, ensure_ascii=False, indent=2)
     soup.head.append(script)
 
-    rendered = str(soup)
-    while rendered.lower().startswith("<!doctype html>\n<!doctype html>"):
-        rendered = rendered[len("<!DOCTYPE html>\n"):]
-    if not rendered.lstrip().lower().startswith("<!doctype html>"):
-        rendered = "<!DOCTYPE html>\n" + rendered
+    # Beautiful Soup preserves every existing doctype node. Remove all of them,
+    # including duplicates separated by whitespace, then add exactly one.
+    for node in list(soup.contents):
+        if isinstance(node, Doctype):
+            node.extract()
+    rendered = "<!DOCTYPE html>\n" + str(soup).lstrip()
 
     if rendered != original:
         path.write_text(rendered, encoding="utf-8")
@@ -211,9 +189,8 @@ def process(path: Path) -> bool:
 def main() -> None:
     changed = 0
     for path in sorted(ROOT.glob("*.html")):
-        if path.name in EXCLUDED:
-            continue
-        changed += int(process(path))
+        if path.name not in EXCLUDED:
+            changed += int(process(path))
     print(f"Updated {changed} review pages.")
 
 
