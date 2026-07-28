@@ -139,13 +139,10 @@ def process(path: Path) -> bool:
 
     if not byline:
         byline = soup.new_tag("p", attrs={"class": "article-byline"})
-        byline.string = f"By {author}  •  {display_date(published)}"
         anchor = soup.select_one(".article-subtitle") or title_node
         anchor.insert_after(byline)
-    else:
-        byline.string = f"By {author}  •  {display_date(published)}"
+    byline.string = f"By {author}  •  {display_date(published)}"
 
-    # Replace an existing QuietTrends Product JSON-LD block rather than duplicating it.
     for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
         if '"@type": "Product"' in script.get_text() or '"@type":"Product"' in script.get_text():
             script.decompose()
@@ -177,7 +174,6 @@ def process(path: Path) -> bool:
         "author": {"@type": "Person", "name": author},
         "publisher": {"@type": "Organization", "name": "QuietTrends", "url": "https://quiettrends.com/"},
         "datePublished": published.isoformat(),
-        "itemReviewed": {"@type": "Product", "name": product_name},
     }
     if score:
         review["reviewRating"] = {"@type": "Rating", "ratingValue": score, "bestRating": "10", "worstRating": "1"}
@@ -199,7 +195,12 @@ def process(path: Path) -> bool:
     script.string = json.dumps(product, ensure_ascii=False, indent=2)
     soup.head.append(script)
 
-    rendered = "<!DOCTYPE html>\n" + str(soup)
+    rendered = str(soup)
+    while rendered.lower().startswith("<!doctype html>\n<!doctype html>"):
+        rendered = rendered[len("<!DOCTYPE html>\n"):]
+    if not rendered.lstrip().lower().startswith("<!doctype html>"):
+        rendered = "<!DOCTYPE html>\n" + rendered
+
     if rendered != original:
         path.write_text(rendered, encoding="utf-8")
         print(f"updated {path.name}: {author}, {published.isoformat()}, {asin or 'no ASIN'}")
