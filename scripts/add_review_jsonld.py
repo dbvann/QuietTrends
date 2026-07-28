@@ -73,7 +73,7 @@ def display_date(value: date) -> str:
 def extract_category(soup: BeautifulSoup, product_name: str) -> str:
     node = soup.select_one(".article-sys-category")
     visible = node.get_text(" ", strip=True) if node else ""
-    visible = re.sub(r"^PRODUCT REVIEW\s*[—-]\s*", "", visible, flags=re.I).strip().lower()
+    visible = re.sub(r"^PRODUCT (?:REVIEW|ANALYSIS)\s*[—-]\s*", "", visible, flags=re.I).strip().lower()
     for canonical in CATEGORY_AUTHORS:
         if canonical in visible:
             return canonical
@@ -106,12 +106,12 @@ def absolute_image(src: str) -> str:
 def process(path: Path) -> bool:
     original = path.read_text(encoding="utf-8")
     soup = BeautifulSoup(original, "html.parser")
-    title_node = soup.select_one("h1.article-title")
+    title_node = soup.select_one("h1.article-title, .article-hero-metadata h1")
     if not title_node:
         return False
 
     title_text = title_node.get_text(" ", strip=True)
-    product_name = re.sub(r"\s+Product Review\s*$", "", title_text, flags=re.I).strip()
+    product_name = re.sub(r"\s+(?:Product )?(?:Review|Analysis)\s*$", "", title_text, flags=re.I).strip()
     category = extract_category(soup, product_name)
 
     byline = soup.select_one(".article-byline")
@@ -172,8 +172,6 @@ def process(path: Path) -> bool:
     script.string = json.dumps(product, ensure_ascii=False, indent=2)
     soup.head.append(script)
 
-    # Beautiful Soup preserves every existing doctype node. Remove all of them,
-    # including duplicates separated by whitespace, then add exactly one.
     for node in list(soup.contents):
         if isinstance(node, Doctype):
             node.extract()
