@@ -42,6 +42,14 @@
   color: #ffffff;
 }
 
+/* Give consecutive article sections consistent breathing room.
+   This separates the Executive Summary from Signal Snapshot,
+   section headings such as Deep Dive from preceding copy,
+   and the next section from a closing Buyer Takeaway box. */
+.article-body-content > .body-section-block + .body-section-block {
+  margin-top: 3rem;
+}
+
 .qt-signal-snapshot {
   border: 1px solid rgba(0, 255, 255, 0.18);
   background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(4, 8, 18, 0.88));
