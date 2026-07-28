@@ -43,4 +43,4 @@ jobs:
           git commit -m "Add author dates and review JSON-LD [skip ci]"
           git push
 
-# This comment intentionally triggers the one-time migration after the workflow exists on main.
+# Triggered again after validating and correcting doctype/schema output.
