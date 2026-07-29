@@ -1,0 +1,20 @@
+name: Trigger Major Fitness F22 SEO
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/trigger-seo-major-fitness-f22.yml'
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch SEO workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run seo-major-fitness-f22.yml --repo ${{ github.repository }}
