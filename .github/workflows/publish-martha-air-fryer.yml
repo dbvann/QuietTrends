@@ -41,3 +41,5 @@ jobs:
           git add index.html sitemap.xml
           git commit -m "Add Martha air fryer review to index and sitemap [skip ci]"
           git push
+
+# Triggered for immediate publication completion.
