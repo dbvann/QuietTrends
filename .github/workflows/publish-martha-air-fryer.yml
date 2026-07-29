@@ -1,0 +1,43 @@
+name: Finish Martha air fryer publication
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-martha-air-fryer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update index and sitemap
+        shell: python
+        run: |
+          from pathlib import Path
+          article = 'martha-stewart-french-door-air-fryer-toaster-oven-product-review.html'
+          index = Path('index.html')
+          text = index.read_text()
+          if article not in text:
+              card = '''                <article class="feed-card"><div class="feed-img-box"><img src="assets/images/products/placeholder-image.jpeg" alt="Martha Stewart French Door Air Fryer Toaster Oven Combo"></div><div class="feed-card-body"><h4>Martha Stewart French Door Air Fryer Toaster Oven</h4><p>Compare-first review of Martha Stewart's 34-quart French-door countertop oven, including 12 cooking modes, rotisserie, family capacity, counter fit, cleaning, and Ninja/Breville alternatives.</p><a href="martha-stewart-french-door-air-fryer-toaster-oven-product-review.html" class="template-link-btn">Read review &rarr;</a></div></article>\n'''
+              text = text.replace('            </div>\n        </section>\n    </main>', card + '            </div>\n        </section>\n    </main>')
+              index.write_text(text)
+          sitemap = Path('sitemap.xml')
+          xml = sitemap.read_text()
+          url = 'https://quiettrends.com/' + article
+          if url not in xml:
+              xml = xml.replace('</urlset>', f'  <url><loc>{url}</loc></url>\n</urlset>')
+              sitemap.write_text(xml)
+      - name: Commit
+        run: |
+          if git diff --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html sitemap.xml
+          git commit -m "Add Martha air fryer review to index and sitemap [skip ci]"
+          git push
