@@ -1,22 +1,33 @@
-name: Trigger Major Fitness F22 SEO
+name: Run Major Fitness F22 SEO
 
 on:
   push:
     branches: [main]
     paths:
       - '.github/workflows/trigger-seo-major-fitness-f22.yml'
+  workflow_dispatch:
 
 permissions:
-  actions: write
-  contents: read
+  contents: write
 
 jobs:
-  trigger:
+  update:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
-      - name: Dispatch SEO workflow
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh workflow run seo-major-fitness-f22.yml --repo ${{ github.repository }}
+      - uses: actions/checkout@v4
+      - name: Apply SEO update
+        run: python scripts/seo_major_fitness_f22.py
+      - name: Commit article
+        run: |
+          if git diff --quiet; then
+            echo "No article changes required"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add major-fitness-f22-power-rack-product-review.html
+          git commit -m "Improve Major Fitness F22 review SEO [skip ci]"
+          git push
 
-# Trigger the dispatcher after both workflows exist on the default branch.
+# Direct run after the update script was added.
