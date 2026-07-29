@@ -18,3 +18,5 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh workflow run seo-major-fitness-f22.yml --repo ${{ github.repository }}
+
+# Trigger the dispatcher after both workflows exist on the default branch.
