@@ -1,0 +1,46 @@
+name: Update T3 Aire 360 Image
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/update-t3-aire-360-image.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-image:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace T3 placeholder image
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('t3-aire-360-dual-voltage-air-styler-product-review.html')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace(
+              'https://quiettrends.com/assets/images/products/placeholder-image.jpeg',
+              'https://quiettrends.com/assets/images/products/Aire_360_Ceramic_Dual_Voltage_Air_Styler.png'
+          )
+          text = text.replace(
+              'assets/images/products/placeholder-image.jpeg',
+              'assets/images/products/Aire_360_Ceramic_Dual_Voltage_Air_Styler.png'
+          )
+          text = text.replace(
+              '<!-- IMAGE NEEDED: T3 Aire 360 Ceramic Dual Voltage Air Styler with the base, two curling barrels, oval brush, concentrator and travel tote. Suggested source for licensed/approved asset: T3 product media or Amazon listing ASIN B0GHZGJGB3. -->\n',
+              ''
+          )
+          path.write_text(text, encoding='utf-8')
+      - name: Commit article image update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add t3-aire-360-dual-voltage-air-styler-product-review.html
+          git diff --cached --quiet && exit 0
+          git commit -m "Replace T3 Aire 360 placeholder image [skip ci]"
+          git push
