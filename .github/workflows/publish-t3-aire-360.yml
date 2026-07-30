@@ -1,0 +1,49 @@
+name: Publish T3 Aire 360
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish-t3-aire-360.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add article to index and sitemap
+        shell: python
+        run: |
+          from pathlib import Path
+
+          article = 't3-aire-360-dual-voltage-air-styler-product-review.html'
+          index_path = Path('index.html')
+          index = index_path.read_text(encoding='utf-8')
+          card = '''                <article class="feed-card"><div class="feed-img-box"><img src="assets/images/products/placeholder-image.jpeg" alt="T3 Aire 360 Ceramic Dual Voltage Air Styler"></div><div class="feed-card-body"><h4>T3 Aire 360 Dual Voltage Air Styler</h4><p>Buy-for-travel review of T3's $349 ceramic multi-styler, including automatic dual voltage, curl hold, attachment limits, hair-type fit, and Dyson Airwrap/Shark comparisons.</p><a href="t3-aire-360-dual-voltage-air-styler-product-review.html" class="template-link-btn">Read review &rarr;</a></div></article>\n'''
+          if article not in index:
+              index = index.replace('            <div class="research-grid">\n', '            <div class="research-grid">\n' + card, 1)
+              index_path.write_text(index, encoding='utf-8')
+
+          sitemap_path = Path('sitemap.xml')
+          sitemap = sitemap_path.read_text(encoding='utf-8')
+          url = 'https://quiettrends.com/' + article
+          entry = f'  <url><loc>{url}</loc><lastmod>2026-07-30</lastmod></url>\n'
+          if url not in sitemap:
+              sitemap = sitemap.replace('</urlset>', entry + '</urlset>')
+              sitemap_path.write_text(sitemap, encoding='utf-8')
+
+      - name: Commit publication links
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html sitemap.xml
+          if git diff --cached --quiet; then
+            echo "No publication-link changes needed"
+          else
+            git commit -m "Add T3 Aire 360 review to index and sitemap [skip ci]"
+            git push
+          fi
