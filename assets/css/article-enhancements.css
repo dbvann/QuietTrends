@@ -151,6 +151,35 @@
   height: 100% !important;
 }
 
+/* Support legacy verdict markup used by some product-review pages. */
+.verdict-panel .verdict-label {
+  font-family: monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.verdict-panel > h2 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 5.5rem;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--accent-mint);
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+}
+
+.verdict-panel > p {
+  max-width: 680px;
+  margin: 0 auto 2rem;
+  color: var(--text-muted);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
 /* Hide unpublished feature-analysis placeholders while preserving main product images. */
 img.article-feature-img[alt*="placeholder"],
 img.article-feature-img[src*="assets/images/features/"] {
@@ -166,5 +195,9 @@ img.article-feature-img[src*="assets/images/features/"] {
   .qt-chart-shell {
     height: 340px;
     max-height: 340px;
+  }
+
+  .verdict-panel > h2 {
+    font-size: 3.2rem;
   }
 }
